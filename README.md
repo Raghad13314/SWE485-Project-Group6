@@ -1,5 +1,9 @@
 # ... – Phishing Detection System
+<p align="center">
+  <img src="https://i.postimg.cc/FKmGSCcc/Gemini-Generated-Image-w1o7juw1o7juw1o7.png" width="250"/>
+</p>
 
+<h2 align="center">Phishing Detection System</h2>
 
 ---
 
