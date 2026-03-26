@@ -4,30 +4,42 @@
 
 <h2 align="center">Phishing Detection System</h2>
 
----
+<hr>
 
-## Group Members
+<h3 align="center">Group Members</h3>
 
-| Name                  | ID        |
-|------------------------|-----------|
-| Layan Almunahi         | 444200511 |
-| Remaz Alkhathlan       | 444201128 |
-| Manar Alotaibi         | 444200310 |
-| Raghad Alzakri         | 444200703 |
-| Deema Alessa           | 444201196 |
-| Nouf Alfaris           | 444200531 |
-| Rua Mohammed Alshahri  | 444200999 |
+<p align="center">
 
+<table align="center">
+  <tr>
+    <th>Name</th>
+    <th>ID</th>
+  </tr>
+  <tr><td>Layan Almunahi</td><td>444200511</td></tr>
+  <tr><td>Remaz Alkhathlan</td><td>444201128</td></tr>
+  <tr><td>Manar Alotaibi</td><td>444200310</td></tr>
+  <tr><td>Raghad Alzakri</td><td>444200703</td></tr>
+  <tr><td>Deema Alessa</td><td>444201196</td></tr>
+  <tr><td>Nouf Alfaris</td><td>444200531</td></tr>
+  <tr><td>Rua Mohammed Alshahri</td><td>444200999</td></tr>
+</table>
 
----
+</p>
 
-## Motivation
+<hr>
 
+<h3 align="center">Motivation</h3>
+
+<p align="center">
 Phishing attacks represent a significant cybersecurity threat, where malicious websites imitate legitimate platforms to obtain sensitive user information.
+</p>
 
+<p align="center">
 This project aims to develop a machine learning model capable of accurately distinguishing between phishing and legitimate URLs based on extracted features.
+</p>
 
+<p align="center">
 The selected dataset is large, well-structured, and properly labeled, making it suitable for building reliable and effective classification models.
+</p>
 
-
----
+<hr>
