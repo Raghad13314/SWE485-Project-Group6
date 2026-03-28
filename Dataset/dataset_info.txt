@@ -1,0 +1,45 @@
+Dataset Information
+===================
+
+UCI ML Repository URL:
+https://archive.ics.uci.edu/dataset/967/phiusiil+phishing+url+dataset
+
+Donated: 3/3/2024
+
+License:
+--------
+This dataset is licensed under a Creative Commons Attribution 4.0 International
+(CC BY 4.0) license.
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+This allows for the sharing and adaptation of the datasets for any purpose,
+provided that the appropriate credit is given.
+
+Original Purpose:
+-----------------
+PhiUSIIL Phishing URL Dataset is a substantial dataset comprising 134,850
+legitimate and 100,945 phishing URLs. Most of the URLs analyzed, while
+constructing the dataset, are the latest URLs. Features are extracted from
+the source code of the webpage and URL. Features such as CharContinuationRate,
+URLTitleMatchScore, URLCharProb, and TLDLegitimateProb are derived from
+existing features.
+
+Dataset Summary:
+-----------------
+- Number of Instances : 235,795 (134,850 legitimate + 100,945 phishing)
+- Number of Features  : 54
+- Feature Types       : Real, Categorical, Integer
+- Subject Area        : Computer Science
+- Associated Task     : Classification
+- Target Variable     : label (1 = Legitimate, 0 = Phishing)
+- Missing Values      : No
+
+Creators:
+---------
+- Arvind Prasad, Babashaheb Bhimrao Ambedkar University (arvindbitm@gmail.com)
+- Shalini Chandra, Babashaheb Bhimrao Ambedkar University
+
+Citation (APA):
+---------------
+Prasad, A. & Chandra, S. (2024). PhiUSIIL Phishing URL (Website) [Dataset].
+UCI Machine Learning Repository. https://doi.org/10.1016/j.cose.2023.103545
