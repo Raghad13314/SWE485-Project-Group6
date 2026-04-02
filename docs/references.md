@@ -1,24 +1,46 @@
 [1] Prasad, A., & Chandra, S. (2024). PhiUSIIL Phishing URL (Website) [Dataset]. UCI Machine Learning Repository. https://doi.org/10.1016/j.cose.2023.103545
+
 [2] Dua, D., & Graff, C. (2017). UCI Machine Learning Repository. University of California, Irvine, School of Information and Computer Sciences. https://archive.ics.uci.edu
+
 [3] DomCop. (n.d.). Top 10 million domains based on Open PageRank. Retrieved March 29, 2026, from https://www.domcop.com/top-10-million-domains
+
 [4] McKinney, W. (2010). Data structures for statistical computing in Python. In S. van der Walt & J. Millman (Eds.), Proceedings of the 9th Python in Science Conference (pp. 56-61). https://doi.org/10.25080/Majora-92bf1922-00a
+
 [5] Harris, C. R., Millman, K. J., van der Walt, S. J., Gommers, R., Virtanen, P., Cournapeau, D., Wieser, E., Taylor, J., Berg, S., Smith, N. J., Kern, R., Picus, M., Hoyer, S., van Krevelen, M. H., Brett, M., Haldane, A., del Rio, J. F., Wiebe, M., Peterson, P., ... Oliphant, T. E. (2020). Array programming with NumPy. Nature, 585(7825), 357-362. https://doi.org/10.1038/s41586-020-2649-2
+
 [6] Hunter, J. D. (2007). Matplotlib: A 2D graphics environment. Computing in Science & Engineering, 9(3), 90-95. https://doi.org/10.1109/MCSE.2007.55
+
 [7] Waskom, M. L. (2021). seaborn: Statistical data visualization. Journal of Open Source Software, 6(60), Article 3021. https://doi.org/10.21105/joss.03021
+
 [8] Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., & Duchesnay, E. (2011). Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12, 2825-2830. https://jmlr.org/papers/v12/pedregosa11a.html
+
 [9] Alkhalil, Z., Hewage, C., Nawaf, L., & Khan, I. (2021). Phishing attacks: A recent comprehensive study and a new anatomy. Frontiers in Computer Science, 3, Article 563060. https://doi.org/10.3389/fcomp.2021.563060
+
 [10] Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5-32. https://doi.org/10.1023/A:1010933404324
+
 [11] Benesty, J., Chen, J., Huang, Y., & Cohen, I. (2009). Pearson correlation coefficient. In Noise reduction in speech processing (pp. 1-4). Springer. https://doi.org/10.1007/978-3-642-00296-0_5
+
 [12] scikit-learn developers. (n.d.). Preprocessing data: Scaling features to a range. scikit-learn documentation. Retrieved March 29, 2026, from https://scikit-learn.org/stable/modules/preprocessing.html#scaling-features-to-a-range
+
 [13] scikit-learn developers. (n.d.). Feature selection: Removing features with low variance. scikit-learn documentation. Retrieved March 29, 2026, from https://scikit-learn.org/stable/modules/feature_selection.html#removing-features-with-low-variance
+
 [14] scikit-learn developers. (n.d.). sklearn.model_selection.train_test_split. scikit-learn documentation. Retrieved March 29, 2026, from https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+
 [15] Kaufman, S., Rosset, S., Perlich, C., & Stitelman, O. (2012). Leakage in data mining: Formulation, detection, and avoidance. ACM Transactions on Knowledge Discovery from Data, 6(4), Article 15. https://doi.org/10.1145/2382577.2382579
+
 [16] Dormann, C. F., Elith, J., Bacher, S., Buchmann, C., Carl, G., Carre, G., Marquez, J. R. G., Gruber, B., Lafourcade, B., Leitao, P. J., Munkemuller, T., McClean, C., Osborne, P. E., Reineking, B., Schroder, B., Skidmore, A. K., Zurell, D., & Lautenbach, S. (2013). Collinearity: A review of methods to deal with it and a simulation study evaluating their performance. Ecography, 36(1), 27-46. https://doi.org/10.1111/j.1600-0587.2012.07348.x
+
 [17] Felt, A. P., Barnes, R., King, A., Palmer, C., Reis, C., & Tabriz, P. (2017). Measuring HTTPS adoption on the web. In Proceedings of the 26th USENIX Security Symposium (pp. 1323-1338). USENIX Association. https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/felt
+
 [18] He, H., & Garcia, E. A. (2009). Learning from imbalanced data. IEEE Transactions on Knowledge and Data Engineering, 21(9), 1263-1284. https://doi.org/10.1109/TKDE.2008.239
 [19] DataCamp. (2026, March 3). Random Forest classification in Python with Scikit-Learn: Step-by-step guide (with code examples). DataCamp. https://www.datacamp.com/tutorial/random-forests-classifier-python
+
 [20] GeeksforGeeks. (2025, December 23). Random Forest algorithm in machine learning. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/random-forest-algorithm-in-machine-learning/
+
 [21] XGBoost developers. (n.d.). Get started with XGBoost. XGBoost documentation. https://xgboost.readthedocs.io/en/stable/get_started.html
+
 [22] Weidagang. (n.d.). Essential Python for machine learning: XGBoost. Medium. https://medium.com/@weidagang/essential-python-for-machine-learning-xgboost-4b662cf19fcd
+
 [23] Scikit-learn developers. (n.d.). LogisticRegression. scikit-learn. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
 [24] GeeksforGeeks. (n.d.). Understanding logistic regression. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/
