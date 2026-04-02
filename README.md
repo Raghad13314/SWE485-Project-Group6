@@ -14,7 +14,7 @@
   <tr>
     <th>Name</th>
     <th>ID</th>
-    <th>Team</th>
+    <th>Work Assigned</th>
   </tr>
   <tr><td>Deema Alessa</td><td>444201196</td><td>Data &amp; Domain</td></tr>
   <tr><td>Roaa Muhammed Alshehri</td><td>444200999</td><td>Data &amp; Domain</td></tr>
