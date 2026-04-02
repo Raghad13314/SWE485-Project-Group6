@@ -1,0 +1,4 @@
+Model,Test Accuracy,OOD Accuracy
+Logistic Regression,0.8311846197342381,0.75
+Random Forest,0.9964093864857224,0.5
+XGBoost,0.9963811139383658,0.5
