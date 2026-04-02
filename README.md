@@ -21,7 +21,7 @@
   <tr><td>Raghad Alzakri</td><td>444200703</td></tr>
   <tr><td>Deema Alessa</td><td>444201196</td></tr>
   <tr><td>Nouf Alfaris</td><td>444200531</td></tr>
-  <tr><td>Roaa Muhammed Alshahri</td><td>444200999</td></tr>
+  <tr><td>Roaa Muhammed Alshehri</td><td>444200999</td></tr>
 </table>
 
 </p>
