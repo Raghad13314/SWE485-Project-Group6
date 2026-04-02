@@ -14,14 +14,15 @@
   <tr>
     <th>Name</th>
     <th>ID</th>
+    <th>Team</th>
   </tr>
-  <tr><td>Layan Almunahi</td><td>444200511</td></tr>
-  <tr><td>Remaz Alkhathlan</td><td>444201128</td></tr>
-  <tr><td>Manar Alotaibi</td><td>444200310</td></tr>
-  <tr><td>Raghad Alzakri</td><td>444200703</td></tr>
-  <tr><td>Deema Alessa</td><td>444201196</td></tr>
-  <tr><td>Nouf Alfaris</td><td>444200531</td></tr>
-  <tr><td>Roaa Muhammed Alshehri</td><td>444200999</td></tr>
+  <tr><td>Deema Alessa</td><td>444201196</td><td>Data &amp; Domain</td></tr>
+  <tr><td>Roaa Muhammed Alshehri</td><td>444200999</td><td>Data &amp; Domain</td></tr>
+  <tr><td>Remaz Alkhathlan</td><td>444201128</td><td>Preprocessing &amp; Visualization</td></tr>
+  <tr><td>Raghad Alzakri</td><td>444200703</td><td>Preprocessing &amp; Visualization</td></tr>
+  <tr><td>Layan Almunahi</td><td>444200511</td><td>Modeling &amp; Evaluation</td></tr>
+  <tr><td>Manar Alotaibi</td><td>444200310</td><td>Modeling &amp; Evaluation</td></tr>
+  <tr><td>Nouf Alfaris</td><td>444200531</td><td>Modeling &amp; Evaluation</td></tr>
 </table>
 
 </p>
