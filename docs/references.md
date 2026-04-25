@@ -44,3 +44,5 @@
 [23] Scikit-learn developers. (n.d.). LogisticRegression. scikit-learn. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 
 [24] GeeksforGeeks. (n.d.). Understanding logistic regression. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/
+
+[25] GeeksforGeeks. (2025, July 23). Davies-Bouldin Index. https://www.geeksforgeeks.org/machine-learning/davies-bouldin-index/
