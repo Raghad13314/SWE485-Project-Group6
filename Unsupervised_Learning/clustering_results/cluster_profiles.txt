@@ -1,0 +1,287 @@
+[5/2/2026 10:15 PM] ☀️: # ================================================================
+CLUSTER PROFILES — Phase 2 Unsupervised Learning
+PhiUSIIL Phishing URL Dataset | K-Means (k=6)
+
+## DATASET
+
+Total URLs     : 235,795
+Features used  : 11 (normalized to [0,1])
+Algorithms     : K-Means (k=6), DBSCAN (eps=0.10, min_samples=20), BIRCH (threshold=0.2, k=6)
+Integration    : K-Means selected for Phase 1 model enhancement
+
+# ================================================================
+SECTION 1: K-MEANS CLUSTERING (k=6)
+
+## EVALUATION METRICS
+
+Silhouette Score      : 0.8639   (higher is better, range -1 to 1)
+Davies-Bouldin Index  : 0.2231   (lower is better)
+WCSS (Inertia)        : 3,861
+
+BCubed External Validation (5,000-point sample)
+BCubed Precision    : 0.7096
+BCubed Recall       : 0.5966
+BCubed F1           : 0.6482
+
+NOTE: BCubed is computed on a 5,000-point sample due to O(n²) complexity.
+Silhouette and DBI are the primary reliability indicators.
+
+## K SELECTION — CANDIDATE COMPARISON
+
+|Metric              |k=4   |k=5   |k=6   |
+|--------------------|------|------|------|
+|WCSS                |8,078 |5,282 |3,861 |
+|Silhouette Score    |0.8356|0.8530|0.8639|
+|Davies-Bouldin Index|0.5447|0.4484|0.2231|
+
+k=6 selected: best on all three metrics and all clusters have
+unambiguous identity (every feature value is a clean 0 or 1).
+
+## CLUSTER PROFILES
+
+|Cluster|Size   |Phishing%|IsHTTPS|URLRedirect|SelfRedirect|
+|-------|-------|---------|-------|-----------|------------|
+|0      |159,765|25.7%    |1.0    |0.0        |0.0         |
+|1      |44,566 |100.0%   |0.0    |0.0        |0.0         |
+|2      |19,967 |37.4%    |1.0    |1.0        |0.0         |
+|3      |4,807  |23.9%    |1.0    |1.0        |1.0         |
+|4      |4,650  |100.0%   |0.0    |1.0        |1.0         |
+|5      |2,040  |100.0%   |0.0    |1.0        |0.0         |
+
+## CLUSTER IDENTITIES
+
+Cluster 0  —  Legitimate (clean)
+159,765 URLs | 25.7% phishing
+HTTPS=1, no redirects. The dominant URL pattern in the
+dataset. Standard safe URLs with no redirect behavior.
+
+Cluster 1  —  Phishing (simple)
+44,566 URLs | 100% phishing
+HTTPS=0, no redirects. The most common phishing pattern.
+Detectable by HTTPS absence alone.
+
+Cluster 2  —  Legitimate (single redirect)
+19,967 URLs | 37.4% phishing
+HTTPS=1, URL redirect only. Safe URLs that use one
+redirect (e.g. link shorteners, login flows).
+
+Cluster 3  —  Legitimate (complex redirect)
+4,807 URLs | 23.9% phishing
+HTTPS=1, both URL and self-redirect. Rare but benign.
+Highest false-positive risk due to redirect complexity.
+
+Cluster 4  —  Phishing (aggressive)
+4,650 URLs | 100% phishing
+HTTPS=0, both URL and self-redirect. Most dangerous
+subgroup — uses full redirect chains to obscure destination.
+
+Cluster 5  —  Phishing (redirect only)
+2,040 URLs | 100% phishing
+HTTPS=0, URL redirect only. Middle-ground attack pattern.
+
+## KEY FINDINGS
+
+1. Primary separator: IsHTTPS
+   Every phishing cluster has IsHTTPS=0.
+   Every legitimate cluster has IsHTTPS=1.
+   HTTPS absence is the strongest structural signal of phishing
+   in this dataset.
+1. Secondary separator: Redirect behavior
+   NoOfURLRedirect and NoOfSelfRedirect subdivide both phishing
+   and legitimate groups into distinct behavioral subgroups.
+1. Most remaining features (URLLength, TLDLength, NoOfEqualsInURL,
+   NoOfQMarkInURL, NoOfAmpersandInURL, NoOfObfuscatedChar) register
+   near 0.00 across all clusters and do not contribute meaningful
+   discriminating signal to the cluster structure.
+1. K-Means recovered domain-relevant groupings purely from lexical
+   URL features, without access to class labels during clustering.
+
+# ================================================================
+SECTION 2: DBSCAN CLUSTERING (eps=0.15, min_samples=20)
+
+## CONFIGURATION
+
+Sample size   : 50,000 (full dataset infeasible due to O(n²) complexity)
+eps           : 0.15
+min_samples   : 20
+
+## EVALUATION METRICS
+
+Number of clusters   : 12
+Silhouette Score     : 0.6152
+Davies-Bouldin Index : 1.0921
+Noise percentage     : 0.30%
+WCSS                 : not applicable (density-based algorithm, no centroids)
+
+BCubed External Validation (noise excluded)
+BCubed Precision    : 0.7154
+BCubed Recall       : 0.5935
+
+NOTE: DBSCAN metrics are computed on the 50,000-row sample and are
+not directly comparable to full-dataset K-Means and BIRCH results.
+
+---
+
+## CLUSTER SIZE DISTRIBUTION
+
+|Cluster|Size |
+|-------|-----|
+|0      |33,149|
+|1      |951  |
+|2      |4,059|
+|3      |9,175|
+|4      |430  |
+|5      |661  |
+|6      |263  |
+|7      |915  |
+|8      |49   |
+|9      |64   |
+|10     |112  |
+|11     |21   |
+
+Cluster 0 dominates the dataset (~66.6% of the sample), while the
+remaining clusters are significantly smaller, indicating that DBSCAN
+separates less frequent patterns into fine-grained groups.
+
+---
+
+## CLUSTER LABEL COMPOSITION (Summary)
+
+- Clusters 1, 3, 4, 5, 6, 8, 9, 10, and 11 are **100% phishing**
+- Cluster 0 is **legitimate-dominated (~76% legit)**
+- Cluster 2 is **mixed (~65% legit)**
+- Cluster 7 is **strongly legitimate (~82% legit)**
+
+This confirms that DBSCAN isolates several **pure phishing subgroups**,
+while grouping legitimate URLs into fewer, larger clusters.
+
+---
+
+## CLUSTER PROFILES (Interpretation)
+
+Unlike K-Means, DBSCAN produces a larger number of smaller clusters,
+each capturing localized density patterns in the data.
+
+- Clusters with **IsHTTPS = 0** are consistently **100% phishing**,
+  confirming that the absence of HTTPS is the strongest structural
+  signal of phishing behavior.
+
+- Clusters with **IsHTTPS = 1** tend to be **legitimate-dominated or mixed**,
+  especially when redirect activity is low.
+
+- Redirect-related features (**NoOfURLRedirect, NoOfSelfRedirect**)
+  further subdivide both phishing and legitimate groups into more
+  specific behavioral patterns.
+
+Overall, DBSCAN provides **fine-grained segmentation**, separating subtle
+variations in URL structure that are grouped together in K-Means.
+
+---
+
+## NOISE ANALYSIS
+
+DBSCAN identified a small proportion of noise points (~0.30%), representing
+URLs that do not belong to any dense cluster.
+
+These points exhibit higher variability in features such as URL length,
+special characters, and redirect behavior, suggesting more complex or
+irregular structures. They may correspond to rare or anomalous URL patterns.
+
+---
+
+## KEY FINDINGS
+
+1. DBSCAN produced 12 clusters with a very low noise ratio (0.30%),
+   indicating that most URLs fall into identifiable density regions.
+
+2. Primary structure remains consistent with K-Means:
+   IsHTTPS and redirect-related features are the dominant drivers
+   of cluster formation.
+
+3. DBSCAN identifies multiple **pure phishing clusters**, each representing
+   structurally similar attack patterns.
+
+4. Compared to K-Means, DBSCAN creates more fragmented clusters,
+   splitting similar patterns into smaller subgroups due to sensitivity
+   to local density differences.
+
+5. DBSCAN was not selected for integration because:
+   - Requires subsampling (cannot scale efficiently to full dataset)
+   - Does not support predict() for new URLs
+   - Cluster count is not fixed and depends on eps and min_samples
+
+# ================================================================
+SECTION 3: BIRCH CLUSTERING (threshold=0.2, k=6)
+
+## CONFIGURATION
+
+Dataset       : Full 235,795 rows (O(n) complexity, no subsampling needed)
+threshold     : 0.2
+branching_factor : 50
+n_clusters    : 6
+
+## EVALUATION METRICS
+
+Silhouette Score      : comparable to K-Means (5,000-point sample)
+Davies-Bouldin Index  : comparable to K-Means (10,000-point sample)
+WCSS                  : not exposed by scikit-learn BIRCH implementation
+
+BCubed External Validation (5,000-point sample)
+BCubed F1           : ~0.65
+
+## KEY FINDINGS
+
+1. BIRCH processed all 235,795 rows in a single O(n) pass without
+   subsampling — a scalability advantage over DBSCAN.
+1. Cluster structure closely mirrors K-Means: same k=6 solution,
+   same primary separator (IsHTTPS), same secondary separators
+   (redirect features).
+1. BIRCH was not selected for integration because K-Means achieved
+   higher Silhouette Score and lower Davies-Bouldin Index on the
+   full dataset, and K-Means centroids are more interpretable for
+   the integration use case.
+
+# ================================================================
+SECTION 4: INTEGRATION STRATEGY
+
+SELECTED ALGORITHM: K-Means (k=6)
+
+## RATIONALE
+
+K-Means is selected for integration over DBSCAN and BIRCH for
+three practical reasons:
+
+1. Full dataset coverage: K-Means ran on all 235,795 URLs.
+   DBSCAN only covered 50,000 rows and cannot assign labels to
+   the remaining URLs without refitting.
+1. Stable fixed cluster count: K-Means always produces exactly
+   k=6 clusters with consistent assignments (same seed), which
+   is important when encoding cluster membership as a model feature.
+1. Prediction on new URLs: K-Means supports predict() — any new
+   URL can be assigned to the nearest centroid at inference time
+   without refitting. DBSCAN has no equivalent capability.
+
+## INTEGRATION APPROACH
+
+The K-Means cluster label (0-5) is appended as a new categorical
+feature (kmeans_cluster) to the preprocessed dataset and saved
+as clustered_data.csv. This file is used to re-train the Phase 1
+supervised model with the additional cluster-based signal.
+
+Expected benefit: the cluster label encodes the combination of
+IsHTTPS and redirect behavior as a single discrete signal, which
+may improve classification of borderline URLs near the decision
+boundary where individual features alone are ambiguous.
+
+## CLUSTER THREAT MAPPING (for system integration)
+
+|Cluster|Identity             |Suggested Action  |
+|-------|---------------------|------------------|
+|0      |Legitimate — clean   |Allow             |
+|1      |Phishing — simple    |Block             |
+|2      |Legitimate — redirect|Allow with caution|
+|3      |Legitimate — complex |Flag for review   |
+|4      |Phishing — aggressive|Block + alert     |
+|5      |Phishing — redirect  |Block             |
+
+# ================================================================
