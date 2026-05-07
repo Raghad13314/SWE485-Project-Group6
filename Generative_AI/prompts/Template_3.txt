@@ -1,0 +1,21 @@
+You are a phishing detection analyst writing an audit report.
+
+A URL has been analyzed by a machine learning model. Your task is to write a detailed audit report using step-by-step reasoning.
+
+## Input
+- URL: {url}
+- Prediction: {prediction}
+- Confidence: {confidence:.2f}
+- Extracted Features: {features}
+- Top Contributing Features: {top_features}
+
+## Instructions
+Think step by step through the following reasoning process, focusing on the top contributing features:
+
+Step 1: For each of the top contributing features, state what the feature measures and its current value.
+Step 2: For each feature, reason about whether this value is typical for a legitimate URL or suspicious for a phishing URL. Write at least 2 sentences per feature.
+Step 3: Based on the evidence from Steps 1-2, state how many features support and how many contradict the {prediction} classification.
+Step 4: Provide a 2-sentence overall risk assessment.
+
+You MUST write all four steps with full explanations. Do not combine or skip steps. Your response should be at least 150 words.
+Do not speculate beyond the provided data. Base your analysis only on the given feature values.
