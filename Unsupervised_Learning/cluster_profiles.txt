@@ -6,7 +6,7 @@ PhiUSIIL Phishing URL Dataset | K-Means (k=6)
 
 Total URLs     : 235,795
 Features used  : 11 (normalized to [0,1])
-Algorithms     : K-Means (k=6), DBSCAN (eps=0.10, min_samples=20), BIRCH (threshold=0.2, k=6)
+Algorithms     : K-Means (k=6), DBSCAN (eps=0.15, min_samples=20), BIRCH (threshold=0.2, k=6)
 Integration    : K-Means selected for Phase 1 model enhancement
 
 # ================================================================
@@ -86,14 +86,17 @@ HTTPS=0, URL redirect only. Middle-ground attack pattern.
    Every legitimate cluster has IsHTTPS=1.
    HTTPS absence is the strongest structural signal of phishing
    in this dataset.
-1. Secondary separator: Redirect behavior
+
+2. Secondary separator: Redirect behavior
    NoOfURLRedirect and NoOfSelfRedirect subdivide both phishing
    and legitimate groups into distinct behavioral subgroups.
-1. Most remaining features (URLLength, TLDLength, NoOfEqualsInURL,
+
+3. Most remaining features (URLLength, TLDLength, NoOfEqualsInURL,
    NoOfQMarkInURL, NoOfAmpersandInURL, NoOfObfuscatedChar) register
    near 0.00 across all clusters and do not contribute meaningful
    discriminating signal to the cluster structure.
-1. K-Means recovered domain-relevant groupings purely from lexical
+
+4. K-Means recovered domain-relevant groupings purely from lexical
    URL features, without access to class labels during clustering.
 
 # ================================================================
@@ -109,11 +112,11 @@ min_samples   : 20
 
 Number of clusters   : 12
 Silhouette Score     : 0.6152
-Davies-Bouldin Index : 1.0921
+Davies-Bouldin Index : 0.7164
 Noise percentage     : 0.30%
 WCSS                 : not applicable (density-based algorithm, no centroids)
 
-BCubed External Validation (noise excluded)
+BCubed External Validation (5,000-point sample, noise excluded)
 BCubed Precision    : 0.7154
 BCubed Recall       : 0.5935
 
@@ -124,20 +127,20 @@ not directly comparable to full-dataset K-Means and BIRCH results.
 
 ## CLUSTER SIZE DISTRIBUTION
 
-|Cluster|Size |
-|-------|-----|
+|Cluster|Size  |
+|-------|------|
 |0      |33,149|
-|1      |951  |
-|2      |4,059|
-|3      |9,175|
-|4      |430  |
-|5      |661  |
-|6      |263  |
-|7      |915  |
-|8      |49   |
-|9      |64   |
-|10     |112  |
-|11     |21   |
+|1      |951   |
+|2      |4,059 |
+|3      |9,175 |
+|4      |430   |
+|5      |661   |
+|6      |263   |
+|7      |915   |
+|8      |49    |
+|9      |64    |
+|10     |112   |
+|11     |21    |
 
 Cluster 0 dominates the dataset (~66.6% of the sample), while the
 remaining clusters are significantly smaller, indicating that DBSCAN
@@ -147,12 +150,12 @@ separates less frequent patterns into fine-grained groups.
 
 ## CLUSTER LABEL COMPOSITION (Summary)
 
-- Clusters 1, 3, 4, 5, 6, 8, 9, 10, and 11 are **100% phishing**
-- Cluster 0 is **legitimate-dominated (~76% legit)**
-- Cluster 2 is **mixed (~65% legit)**
-- Cluster 7 is **strongly legitimate (~82% legit)**
+- Clusters 1, 3, 4, 5, 6, 8, 9, 10, and 11 are 100% phishing
+- Cluster 0 is legitimate-dominated (~76% legit)
+- Cluster 2 is mixed (~65% legit)
+- Cluster 7 is strongly legitimate (~82% legit)
 
-This confirms that DBSCAN isolates several **pure phishing subgroups**,
+This confirms that DBSCAN isolates several pure phishing subgroups,
 while grouping legitimate URLs into fewer, larger clusters.
 
 ---
@@ -162,18 +165,18 @@ while grouping legitimate URLs into fewer, larger clusters.
 Unlike K-Means, DBSCAN produces a larger number of smaller clusters,
 each capturing localized density patterns in the data.
 
-- Clusters with **IsHTTPS = 0** are consistently **100% phishing**,
+- Clusters with IsHTTPS = 0 are consistently 100% phishing,
   confirming that the absence of HTTPS is the strongest structural
   signal of phishing behavior.
 
-- Clusters with **IsHTTPS = 1** tend to be **legitimate-dominated or mixed**,
+- Clusters with IsHTTPS = 1 tend to be legitimate-dominated or mixed,
   especially when redirect activity is low.
 
-- Redirect-related features (**NoOfURLRedirect, NoOfSelfRedirect**)
+- Redirect-related features (NoOfURLRedirect, NoOfSelfRedirect)
   further subdivide both phishing and legitimate groups into more
   specific behavioral patterns.
 
-Overall, DBSCAN provides **fine-grained segmentation**, separating subtle
+Overall, DBSCAN provides fine-grained segmentation, separating subtle
 variations in URL structure that are grouped together in K-Means.
 
 ---
@@ -198,7 +201,7 @@ irregular structures. They may correspond to rare or anomalous URL patterns.
    IsHTTPS and redirect-related features are the dominant drivers
    of cluster formation.
 
-3. DBSCAN identifies multiple **pure phishing clusters**, each representing
+3. DBSCAN identifies multiple pure phishing clusters, each representing
    structurally similar attack patterns.
 
 4. Compared to K-Means, DBSCAN creates more fragmented clusters,
@@ -210,259 +213,143 @@ irregular structures. They may correspond to rare or anomalous URL patterns.
    - Does not support predict() for new URLs
    - Cluster count is not fixed and depends on eps and min_samples
 
-================================================================
+# ================================================================
 SECTION 3: BIRCH CLUSTERING (threshold=0.2, branching_factor=50, k=6)
- 
-configuration:
-  Dataset size     : 235,795 URLs (full, no subsampling)
-  threshold        : 0.2
-  branching_factor : 50 (scikit-learn default)
-  n_clusters       : 6
- 
-Cluster distribution:
-  Cluster 0: 179,732 URLs (76.2%)
-  Cluster 1:  44,560 URLs (18.9%)
-  Cluster 2:   2,040 URLs  (0.9%)
-  Cluster 3:   4,650 URLs  (2.0%)
-  Cluster 4:       6 URLs  (0.0%)
-  Cluster 5:   4,807 URLs  (2.0%)
- 
-----------------------------------------------------------------
-3.1 Evaluation Metrics & Visualizations
-----------------------------------------------------------------
- 
-In this section, the performance of the BIRCH model is evaluated
-using clustering quality metrics and visualizations. The same
-evaluation framework used for K-Means is applied here to allow
-direct comparison. Both internal and external metrics are reported.
- 
-The following metrics are considered:
- 
-  - Silhouette Score (higher is better): measures how well each
-    point fits its own cluster compared to neighboring clusters.
-  - Davies-Bouldin Index (lower is better): measures cluster
-    compactness and separation.
-  - BCubed Precision and Recall: external metrics that compare
-    cluster assignments to the true phishing/legitimate labels.
-  - WCSS: not reported for BIRCH (see explanation below).
- 
- 
-3.1.1 Internal Evaluation Metrics
-----------------------------------
- 
-  === BIRCH Internal Evaluation Metrics ===
-    Silhouette Score      : 0.7435   (5,000-point sample)
-    Davies-Bouldin Index  : 0.2819   (10,000-point sample)
- 
-The Silhouette Score of 0.7435 indicates meaningful cluster cohesion
-and separation. It is lower than K-Means (0.8639), which is expected.
-BIRCH optimises the CF Tree radius in a single pass over the data
-rather than iteratively minimising within-cluster distances as K-Means
-does. Each iteration of K-Means moves centroids closer to their
-cluster members until convergence; BIRCH has no equivalent refinement
-step. This structural difference explains the gap in Silhouette Score
-without indicating that BIRCH produced poor clusters — the clusters
-themselves represent the same URL behavioral groups.
- 
-The Davies-Bouldin Index of 0.2819 is low, confirming that the
-clusters are compact and well-separated from each other. This is
-consistent with the K-Means result (0.2231) and confirms that the
-six-cluster structure is internally coherent.
- 
-Sampling note: Silhouette Score is computed on a 5,000-point random
-sample and Davies-Bouldin on a 10,000-point sample because computing
-these metrics on the full 235,795-row dataset is computationally
-expensive. Sampling is the standard approach for large datasets.
- 
-Within-Cluster Sum of Squares (WCSS)
---------------------------------------
- 
-WCSS (Within-Cluster Sum of Squares) is not reported for BIRCH.
-The scikit-learn BIRCH implementation does not expose an inertia_
-attribute directly, unlike K-Means. WCSS is primarily associated
-with centroid-based algorithms that minimise this quantity explicitly
-as their objective function. BIRCH minimises CF Tree radius, not WCSS,
-so reporting WCSS would not reflect the algorithm's actual optimisation
-objective. Silhouette Score and Davies-Bouldin Index are the primary
-reliability indicators for BIRCH evaluation.
- 
- 
-3.1.2 BCubed Precision & Recall (External Validation)
--------------------------------------------------------
- 
-Since ground truth labels are available, BCubed Precision and Recall
-are computed to externally validate how well the BIRCH clusters align
-with the true phishing/legitimate classes. BCubed evaluates clustering
-by checking, for each point, how many points in the same cluster share
-the same true label.
- 
-  - BCubed Precision: of all points in the same cluster, what
-    fraction share the same true label?
-  - BCubed Recall: of all points with the same true label, what
-    fraction are in the same cluster?
-  - BCubed F1: harmonic mean of precision and recall.
- 
-  === BCubed External Validation ===
-    BCubed Precision : 0.7076
-    BCubed Recall    : 0.7203
-    BCubed F1        : 0.7139
- 
-BCubed Precision of 0.7076 indicates that clusters are reasonably
-pure  most points within the same cluster share the same true label.
-This is comparable to the K-Means result (0.7096), indicating that
-BIRCH achieves similar cluster purity despite its different algorithmic
-approach.
- 
-BCubed Recall of 0.7203 is notably higher than K-Means (0.5966).
-This means BIRCH is better at grouping URLs of the same true class
-into the same cluster. The reason is that BIRCH's dominant Cluster 0
-absorbs a larger proportion of the dataset (76.2%) compared to
-K-Means Cluster 0 (67.8%), which keeps more same-class URLs together
-and increases recall. The tradeoff is reduced granularity in the
-legitimate URL subgroups.
- 
-BCubed is computed on a 5,000-point sample because its O(n²)
-complexity makes it infeasible on 235,795 rows. Silhouette Score
-and Davies-Bouldin Index, computed on the full dataset, remain the
-primary reliability indicators.
 
-----------------------------------------------------------------
-3.2 Cluster Interpretation & Profiles
-----------------------------------------------------------------
- 
-To enable cluster-level analysis, the BIRCH cluster label is
-attached to each data point. The ground-truth label (phishing or
-legitimate) is added for interpretation purposes only — it was
-not used at any point during clustering.
- 
-Each cluster has a distinct and interpretable identity based on
-HTTPS usage, redirect behavior, and phishing composition:
- 
-  | Cluster | Size    | Phishing% | Identity               | Key Characteristics              |
-  |---------|---------|-----------|------------------------|----------------------------------|
-  | 0       | 179,732 | 27.0%     | Legitimate-leaning     | HTTPS=1, URL redirect (partial)  |
-  | 1       |  44,560 | 100.0%    | Pure phishing          | HTTPS=0, no redirects            |
-  | 2       |   2,040 | 100.0%    | Pure phishing          | HTTPS=0, URL redirect only       |
-  | 3       |   4,650 | 100.0%    | Pure phishing          | HTTPS=0, both redirects          |
-  | 4       |       6 | 100.0%    | Pure phishing (outlier)| HTTPS=0, extreme subdomain depth |
-  | 5       |   4,807 |  23.9%    | Legitimate-leaning     | HTTPS=1, both redirects          |
- 
-Label composition per cluster:
- 
-  | Cluster | Phishing | Legitimate | Total   | %Phishing | %Legitimate |
-  |---------|----------|------------|---------|-----------|-------------|
-  | 0       | 48,540   | 131,192    | 179,732 | 27.0%     | 73.0%       |
-  | 1       | 44,560   | 0          | 44,560  | 100.0%    | 0.0%        |
-  | 2       | 2,040    | 0          | 2,040   | 100.0%    | 0.0%        |
-  | 3       | 4,650    | 0          | 4,650   | 100.0%    | 0.0%        |
-  | 4       | 6        | 0          | 6       | 100.0%    | 0.0%        |
-  | 5       | 1,149    | 3,658      | 4,807   | 23.9%     | 76.1%       |
- 
-The label composition table shows the phishing and legitimate
-breakdown within each BIRCH cluster. Four clusters (1, 2, 3, 4)
-are composed entirely of phishing URLs, indicating that BIRCH
-identified multiple structurally distinct phishing subgroups based
-purely on URL feature patterns.
- 
-Clusters 0 and 5 are legitimate-leaning but each contains a
-phishing minority. In Cluster 0, the 27% phishing proportion
-represents phishing URLs that have adopted HTTPS — a known evasion
-technique that mimics legitimate URL structure. In Cluster 5, the
-23.9% phishing minority represents phishing URLs that use both
-URL and self-redirect chains, structurally similar to legitimate
-redirect-based services.
- 
-The true labels were not used during clustering — they are used
-here only to interpret the meaning of the discovered groups.
- 
- 
-Cluster Profiles
------------------
- 
+## CONFIGURATION
+
+Dataset size     : 235,795 URLs (full, no subsampling)
+threshold        : 0.2
+branching_factor : 50 (scikit-learn default)
+n_clusters       : 6
+
+## CLUSTER DISTRIBUTION
+
+Cluster 0: 179,732 URLs (76.2%)
+Cluster 1:  44,560 URLs (18.9%)
+Cluster 2:   2,040 URLs  (0.9%)
+Cluster 3:   4,650 URLs  (2.0%)
+Cluster 4:       6 URLs  (0.0%)
+Cluster 5:   4,807 URLs  (2.0%)
+
+## EVALUATION METRICS
+
+Silhouette Score      : 0.7435   (5,000-point sample)
+Davies-Bouldin Index  : 0.2819   (10,000-point sample)
+WCSS                  : not reported (BIRCH minimises CF Tree radius, not WCSS)
+
+BCubed External Validation (5,000-point sample)
+BCubed Precision    : 0.7076
+BCubed Recall       : 0.7203
+BCubed F1           : 0.7139
+
+The Silhouette Score of 0.7435 is lower than K-Means (0.8639), which
+is expected. BIRCH optimises the CF Tree radius in a single pass over
+the data rather than iteratively minimising within-cluster distances
+as K-Means does. This structural difference explains the gap without
+indicating poor clusters.
+
+The Davies-Bouldin Index of 0.2819 is low, confirming compact and
+well-separated clusters, consistent with the K-Means result (0.2231).
+
+BCubed Recall of 0.7203 is notably higher than K-Means (0.5966).
+BIRCH's dominant Cluster 0 absorbs 76.2% of the dataset compared to
+K-Means Cluster 0 at 67.8%, keeping more same-class URLs together
+and increasing recall. The tradeoff is reduced granularity in the
+legitimate URL subgroups.
+
+## CLUSTER PROFILES
+
+| Cluster | Size    | Phishing% | Identity               | Key Characteristics              |
+|---------|---------|-----------|------------------------|----------------------------------|
+| 0       | 179,732 | 27.0%     | Legitimate-leaning     | HTTPS=1, URL redirect (partial)  |
+| 1       |  44,560 | 100.0%    | Pure phishing          | HTTPS=0, no redirects            |
+| 2       |   2,040 | 100.0%    | Pure phishing          | HTTPS=0, URL redirect only       |
+| 3       |   4,650 | 100.0%    | Pure phishing          | HTTPS=0, both redirects          |
+| 4       |       6 | 100.0%    | Pure phishing (outlier)| HTTPS=0, extreme subdomain depth |
+| 5       |   4,807 |  23.9%    | Legitimate-leaning     | HTTPS=1, both redirects          |
+
+## LABEL COMPOSITION
+
+| Cluster | Phishing | Legitimate | Total   | %Phishing | %Legitimate |
+|---------|----------|------------|---------|-----------|-------------|
+| 0       | 48,540   | 131,192    | 179,732 | 27.0%     | 73.0%       |
+| 1       | 44,560   | 0          | 44,560  | 100.0%    | 0.0%        |
+| 2       | 2,040    | 0          | 2,040   | 100.0%    | 0.0%        |
+| 3       | 4,650    | 0          | 4,650   | 100.0%    | 0.0%        |
+| 4       | 6        | 0          | 6       | 100.0%    | 0.0%        |
+| 5       | 1,149    | 3,658      | 4,807   | 23.9%     | 76.1%       |
+
+## CLUSTER IDENTITIES
+
 Cluster 0 — Legitimate-leaning (clean HTTPS)
 179,732 URLs | 27.0% phishing | IsHTTPS=1.0 | URLRedirect=0.11 | SelfRedirect=0.0
- 
+
 The dominant cluster, containing 76.2% of all URLs. Mostly composed
 of legitimate URLs with HTTPS enabled and minimal redirect activity.
 The 27% phishing minority consists of phishing URLs that use HTTPS
-— a deliberate structural imitation of legitimate URLs. This cluster
-appeared fragmented in the t-SNE projection due to internal diversity
-in secondary features such as URLLength and DomainLength.
- 
+as a deliberate structural imitation of legitimate URLs.
+
 Cluster 1 — Pure phishing (simple, no redirect)
 44,560 URLs | 100.0% phishing | IsHTTPS=0.0 | URLRedirect=0.0 | SelfRedirect=0.0
- 
+
 The largest pure phishing cluster. All URLs lack HTTPS and have no
-redirect activity. These are the most structurally straightforward
-phishing URLs — detectable by HTTPS absence alone. Appears as a
-compact, isolated region in the t-SNE projection.
- 
+redirect activity. Detectable by HTTPS absence alone.
+
 Cluster 2 — Pure phishing (URL redirect only)
 2,040 URLs | 100.0% phishing | IsHTTPS=0.0 | URLRedirect=1.0 | SelfRedirect=0.0
- 
+
 All URLs are phishing and use URL redirection without self-redirect.
 These represent phishing pages that route users through one
-intermediate step to obscure the final destination, while still
-lacking HTTPS.
- 
+intermediate step to obscure the final destination.
+
 Cluster 3 — Pure phishing (both redirects)
 4,650 URLs | 100.0% phishing | IsHTTPS=0.0 | URLRedirect=1.0 | SelfRedirect=1.0
- 
-All URLs are phishing and use both URL and self-redirect. These
-represent the most complex phishing attack chains — multi-step
-redirection combined with self-redirect loops used to evade
-detection systems. Structurally the most dangerous subgroup.
- 
+
+All URLs are phishing and use both URL and self-redirect. The most
+complex phishing attack chains, using multi-step redirection combined
+with self-redirect loops to evade detection. Structurally the most
+dangerous subgroup.
+
 Cluster 4 — Pure phishing (structural outlier)
 6 URLs | 100.0% phishing | IsHTTPS=0.0 | DomainLength=0.89 | NoOfSubDomain=0.95
- 
+
 A micro-cluster of 6 URLs with extreme DomainLength and NoOfSubDomain
-values — far above all other clusters. These represent phishing URLs
-with unusually deep and complex subdomain structures that are
-structurally unlike any other group in the dataset. BIRCH correctly
+values, far above all other clusters. These represent phishing URLs
+with unusually deep and complex subdomain structures. BIRCH correctly
 isolated them due to their distinct feature combination.
- 
+
 Cluster 5 — Legitimate-leaning (both redirects)
 4,807 URLs | 23.9% phishing | IsHTTPS=1.0 | URLRedirect=1.0 | SelfRedirect=1.0
- 
-Mostly legitimate URLs (76.1%) that use both URL and self-redirect.
-These are legitimate services that use redirect chains for functional
-reasons such as authentication flows and link tracking. The 23.9%
-phishing minority represents phishing URLs that deliberately mimic
-this redirect pattern while maintaining HTTPS — the most structurally
-sophisticated evasion strategy in the dataset.
- 
- 
-3.3 Key Findings
--------------
- 
+
+Mostly legitimate URLs (76.1%) that use both URL and self-redirect
+for functional reasons such as authentication flows and link tracking.
+The 23.9% phishing minority represents phishing URLs that deliberately
+mimic this redirect pattern while maintaining HTTPS.
+
+## KEY FINDINGS
+
 1. The primary separator across all clusters is IsHTTPS. Every
-  cluster with IsHTTPS=0 is 100% phishing. Every cluster with
-  IsHTTPS=1 is legitimate-leaning. The absence of HTTPS encryption
-  is the single strongest structural signal of phishing in this
-  dataset.
- 
+   cluster with IsHTTPS=0 is 100% phishing. Every cluster with
+   IsHTTPS=1 is legitimate-leaning.
+
 2. Redirect behavior (NoOfURLRedirect, NoOfSelfRedirect) acts as the
-  secondary separator, subdividing both phishing and legitimate groups
-  into four distinct behavioral patterns: no redirect, URL redirect
-  only, self-redirect only, and both redirects.
- 
-3. Most remaining features (URLLength, TLDLength, NoOfEqualsInURL,
-  NoOfQMarkInURL, NoOfAmpersandInURL, NoOfObfuscatedChar) register
-  near 0.00 across all clusters, indicating that they do not
-  contribute meaningful discriminating signal to the cluster
-  structure.
- 
+   secondary separator, subdividing both phishing and legitimate groups
+   into four distinct behavioral patterns.
+
+3. Most remaining features register near 0.00 across all clusters and
+   do not contribute meaningful discriminating signal to the cluster
+   structure.
+
 4. BIRCH independently converged on the same k=6 and discovered the
-  same six URL behavioral groups as K-Means. Both algorithms
-  identified IsHTTPS as the primary separator and redirect behavior
-  as the secondary separator. This convergence across two fundamentally
-  different algorithmic approaches confirms that this structure is a
-  genuine property of the data, not an artifact of either algorithm.
- 
+   same six URL behavioral groups as K-Means. This convergence across
+   two fundamentally different algorithmic approaches confirms that
+   this structure is a genuine property of the data.
+
 5. BIRCH successfully clustered the full 235,795-row dataset in a
-  single O(n) pass without requiring subsampling, unlike DBSCAN which
-  was limited to 50,000 rows.
+   single O(n) pass without requiring subsampling, unlike DBSCAN which
+   was limited to 50,000 rows.
+
 # ================================================================
 SECTION 4: INTEGRATION STRATEGY
 
@@ -476,10 +363,12 @@ three practical reasons:
 1. Full dataset coverage: K-Means ran on all 235,795 URLs.
    DBSCAN only covered 50,000 rows and cannot assign labels to
    the remaining URLs without refitting.
-1. Stable fixed cluster count: K-Means always produces exactly
+
+2. Stable fixed cluster count: K-Means always produces exactly
    k=6 clusters with consistent assignments (same seed), which
    is important when encoding cluster membership as a model feature.
-1. Prediction on new URLs: K-Means supports predict() — any new
+
+3. Prediction on new URLs: K-Means supports predict() — any new
    URL can be assigned to the nearest centroid at inference time
    without refitting. DBSCAN has no equivalent capability.
 
