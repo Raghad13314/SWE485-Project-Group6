@@ -33,6 +33,7 @@
 [17] Felt, A. P., Barnes, R., King, A., Palmer, C., Reis, C., & Tabriz, P. (2017). Measuring HTTPS adoption on the web. In Proceedings of the 26th USENIX Security Symposium (pp. 1323-1338). USENIX Association. https://www.usenix.org/conference/usenixsecurity17/technical-sessions/presentation/felt
 
 [18] He, H., & Garcia, E. A. (2009). Learning from imbalanced data. IEEE Transactions on Knowledge and Data Engineering, 21(9), 1263-1284. https://doi.org/10.1109/TKDE.2008.239
+
 [19] DataCamp. (2026, March 3). Random Forest classification in Python with Scikit-Learn: Step-by-step guide (with code examples). DataCamp. https://www.datacamp.com/tutorial/random-forests-classifier-python
 
 [20] GeeksforGeeks. (2025, December 23). Random Forest algorithm in machine learning. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/random-forest-algorithm-in-machine-learning/
@@ -41,27 +42,27 @@
 
 [22] Weidagang. (n.d.). Essential Python for machine learning: XGBoost. Medium. https://medium.com/@weidagang/essential-python-for-machine-learning-xgboost-4b662cf19fcd
 
-[23] Scikit-learn developers. (n.d.). LogisticRegression. scikit-learn. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+[23] scikit-learn developers. (n.d.). LogisticRegression. scikit-learn. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 
 [24] GeeksforGeeks. (n.d.). Understanding logistic regression. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/understanding-logistic-regression/
 
-[25] GeeksforGeeks. (2025, July 23). Davies-Bouldin Index. https://www.geeksforgeeks.org/machine-learning/davies-bouldin-index/
+[25] GeeksforGeeks. (2025, July 23). Davies-Bouldin Index. GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/davies-bouldin-index/
 
-[26] GeeksforGeeks. (2022). ML | BIRCH clustering. https://www.geeksforgeeks.org/ml-birch-clustering/
+[26] GeeksforGeeks. (2022). ML | BIRCH clustering. GeeksforGeeks. https://www.geeksforgeeks.org/ml-birch-clustering/
 
-[27] GeeksforGeeks. (2025). Elbow method vs. silhouette score: which is better? https://www.geeksforgeeks.org/machine-learning/elbow-method-vs-silhouette-score-which-is-better/
+[27] GeeksforGeeks. (2025). Elbow method vs. silhouette score: which is better? GeeksforGeeks. https://www.geeksforgeeks.org/machine-learning/elbow-method-vs-silhouette-score-which-is-better/
 
-[28] Scikit-learn developers. (n.d.). BIRCH. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html
+[28] scikit-learn developers. (n.d.). BIRCH. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.Birch.html
 
-[29] Scikit-learn developers. (n.d.). DBSCAN. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html
+[29] scikit-learn developers. (n.d.). DBSCAN. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html
 
-[30] Scikit-learn developers. (n.d.). KMeans. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html
+[30] scikit-learn developers. (n.d.). KMeans. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html
 
-[31] Scikit-learn developers. (n.d.). Clustering. scikit-learn documentation. https://scikit-learn.org/stable/modules/clustering.html
+[31] scikit-learn developers. (n.d.). Clustering. scikit-learn documentation. https://scikit-learn.org/stable/modules/clustering.html
 
-[32] Scikit-learn developers. (n.d.). MinMaxScaler. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
+[32] scikit-learn developers. (n.d.). MinMaxScaler. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html
 
-[33] Scikit-learn developers. (n.d.). PCA. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+[33] scikit-learn developers. (n.d.). PCA. scikit-learn documentation. https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
 
 [34] Sefidian, A. M. (2022). How to determine epsilon and MinPts parameters of DBSCAN clustering. Sefidian Academy. https://www.sefidian.com/2022/12/18/how-to-determine-epsilon-and-minpts-parameters-of-dbscan-clustering/
 
@@ -72,3 +73,5 @@
 [37] Ester, M., Kriegel, H. P., Sander, J., & Xu, X. (1996). A density-based algorithm for discovering clusters in large spatial databases with noise. Proceedings of the Second International Conference on Knowledge Discovery and Data Mining (KDD-96), 226–231.
 
 [38] van der Maaten, L., & Hinton, G. (2008). Visualizing data using t-SNE. Journal of Machine Learning Research, 9, 2579–2605. https://jmlr.org/papers/v9/vandermaaten08a.html
+
+[39] Google. (2025). Gemini API documentation. Google AI for Developers. Retrieved April 26, 2026, from https://ai.google.dev/docs
